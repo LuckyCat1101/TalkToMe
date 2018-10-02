@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.enableVoiceBttn = new System.Windows.Forms.Button();
-            this.disableBttn = new System.Windows.Forms.Button();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.stopBttn = new System.Windows.Forms.Button();
+            this.richTextBox = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // enableVoiceBttn
@@ -39,36 +39,39 @@
             this.enableVoiceBttn.Name = "enableVoiceBttn";
             this.enableVoiceBttn.Size = new System.Drawing.Size(184, 30);
             this.enableVoiceBttn.TabIndex = 0;
-            this.enableVoiceBttn.Text = "Enable Voice Recording";
+            this.enableVoiceBttn.Text = "Start Voice Recording";
             this.enableVoiceBttn.UseVisualStyleBackColor = true;
+            this.enableVoiceBttn.Click += new System.EventHandler(this.enableVoiceBttn_Click);
             // 
-            // disableBttn
+            // stopBttn
             // 
-            this.disableBttn.Location = new System.Drawing.Point(237, 417);
-            this.disableBttn.Name = "disableBttn";
-            this.disableBttn.Size = new System.Drawing.Size(184, 30);
-            this.disableBttn.TabIndex = 1;
-            this.disableBttn.Text = "Disable Voice Recording";
-            this.disableBttn.UseVisualStyleBackColor = true;
+            this.stopBttn.Enabled = false;
+            this.stopBttn.Location = new System.Drawing.Point(237, 417);
+            this.stopBttn.Name = "stopBttn";
+            this.stopBttn.Size = new System.Drawing.Size(184, 30);
+            this.stopBttn.TabIndex = 1;
+            this.stopBttn.Text = "Stop Voice Recording";
+            this.stopBttn.UseVisualStyleBackColor = true;
+            this.stopBttn.Click += new System.EventHandler(this.stopBttn_Click);
             // 
-            // richTextBox1
+            // richTextBox
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(12, 12);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(438, 380);
-            this.richTextBox1.TabIndex = 2;
-            this.richTextBox1.Text = "";
+            this.richTextBox.Location = new System.Drawing.Point(12, 12);
+            this.richTextBox.Name = "richTextBox";
+            this.richTextBox.Size = new System.Drawing.Size(438, 380);
+            this.richTextBox.TabIndex = 2;
+            this.richTextBox.Text = "";
             // 
             // SpeechToTextForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(456, 459);
-            this.Controls.Add(this.richTextBox1);
-            this.Controls.Add(this.disableBttn);
+            this.Controls.Add(this.richTextBox);
+            this.Controls.Add(this.stopBttn);
             this.Controls.Add(this.enableVoiceBttn);
             this.Name = "SpeechToTextForm";
-            this.Text = "STT Text";
+            this.Text = " System Speech: Speech To Text";
             this.Load += new System.EventHandler(this.SpeechToTextForm_Load);
             this.ResumeLayout(false);
 
@@ -77,8 +80,8 @@
         #endregion
 
         private System.Windows.Forms.Button enableVoiceBttn;
-        private System.Windows.Forms.Button disableBttn;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Button stopBttn;
+        private System.Windows.Forms.RichTextBox richTextBox;
     }
 }
 
