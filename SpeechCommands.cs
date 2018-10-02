@@ -49,7 +49,7 @@ namespace Speech_Recognition
                     PromptBuilder builder = new PromptBuilder();
 
                     builder.StartSentence();
-                    builder.AppendText("Hello Vanesa!");
+                    builder.AppendText("Hello LuckyCat!");
                     builder.EndSentence();
 
                     builder.StartSentence();
@@ -60,7 +60,7 @@ namespace Speech_Recognition
                     synthesizer.SpeakAsync(builder);
                     break;
                 case "print my name":
-                    richTextBox.Text += "\nVanesa";
+                    richTextBox.Text += "\nLuckyCat1101";
                     break;
                 case "speak selected text":
                     synthesizer.SpeakAsync(richTextBox.SelectedText);
