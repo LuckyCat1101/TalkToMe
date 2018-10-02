@@ -23,18 +23,19 @@ namespace BuiltInSpeechRecognition
         private void SpeechToTextForm_Load(object sender, EventArgs e)
         {
             // Create a default dictation grammar.  
-            DictationGrammar grammar = new DictationGrammar();
-            grammar.Name = "default dictation";
-            grammar.Enabled = true;
+            GrammarBuilder gBuilder = new GrammarBuilder();
+            gBuilder.AppendDictation();
 
-            // Create the spelling dictation grammar.  
+            Grammar grammar = new Grammar(gBuilder);
+
+            /*// Create the spelling dictation grammar.  
             DictationGrammar spellingDictationGrammar =
               new DictationGrammar("grammar:dictation#spelling");
             spellingDictationGrammar.Name = "spelling dictation";
-            spellingDictationGrammar.Enabled = true;
+            spellingDictationGrammar.Enabled = true;*/
 
             recognitionEngine.LoadGrammar(grammar);
-            recognitionEngine.LoadGrammar(spellingDictationGrammar);
+            // recognitionEngine.LoadGrammar(spellingDictationGrammar);
             recognitionEngine.SetInputToDefaultAudioDevice();
             recognitionEngine.SpeechRecognized += RecognitionEngine_SpeechRecognized;
         }
