@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2035
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BingSpeechSpeechToText", "BuiltInSpeechRecognition\BingSpeechSpeechToText.csproj", "{C7250AAE-2986-4F10-A3D4-719BC8D5C010}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C7250AAE-2986-4F10-A3D4-719BC8D5C010}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7250AAE-2986-4F10-A3D4-719BC8D5C010}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7250AAE-2986-4F10-A3D4-719BC8D5C010}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7250AAE-2986-4F10-A3D4-719BC8D5C010}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {55AF29D5-8659-4671-B862-F33ACD77D442}
+	EndGlobalSection
+EndGlobal

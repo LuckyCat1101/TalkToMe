@@ -28,21 +28,21 @@ namespace BuiltInSpeechRecognition
 
             Grammar grammar = new Grammar(gBuilder);
 
-            /*// Create the spelling dictation grammar.  
+            // Create the spelling dictation grammar.  
             DictationGrammar spellingDictationGrammar =
               new DictationGrammar("grammar:dictation#spelling");
             spellingDictationGrammar.Name = "spelling dictation";
-            spellingDictationGrammar.Enabled = true;*/
+            spellingDictationGrammar.Enabled = true;
 
             recognitionEngine.LoadGrammar(grammar);
-            // recognitionEngine.LoadGrammar(spellingDictationGrammar);
+            recognitionEngine.LoadGrammar(spellingDictationGrammar);
             recognitionEngine.SetInputToDefaultAudioDevice();
             recognitionEngine.SpeechRecognized += RecognitionEngine_SpeechRecognized;
         }
 
         private void RecognitionEngine_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
         {
-            richTextBox.Text += "\n" + e.Result.Text;
+            richTextBox.Text += " " + e.Result.Text;
         }
 
         private void stopBttn_Click(object sender, EventArgs e)

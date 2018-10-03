@@ -46,16 +46,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="STTForm.cs">
+    <Compile Include="SphinxSpeechSpeechToText.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="STTForm.Designer.cs">
-      <DependentUpon>STTForm.cs</DependentUpon>
+    <Compile Include="SphinxSpeechSpeechToText.Designer.cs">
+      <DependentUpon>SphinxSpeechSpeechToText.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="STTForm.resx">
-      <DependentUpon>STTForm.cs</DependentUpon>
+    <EmbeddedResource Include="SphinxSpeechSpeechToText.resx">
+      <DependentUpon>SphinxSpeechSpeechToText.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
