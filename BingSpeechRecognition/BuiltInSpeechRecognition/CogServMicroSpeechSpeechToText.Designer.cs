@@ -35,6 +35,7 @@
             // 
             // enableVoiceBttn
             // 
+            this.enableVoiceBttn.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.enableVoiceBttn.Location = new System.Drawing.Point(36, 417);
             this.enableVoiceBttn.Name = "enableVoiceBttn";
             this.enableVoiceBttn.Size = new System.Drawing.Size(184, 30);
@@ -45,6 +46,7 @@
             // 
             // stopBttn
             // 
+            this.stopBttn.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.stopBttn.Enabled = false;
             this.stopBttn.Location = new System.Drawing.Point(237, 417);
             this.stopBttn.Name = "stopBttn";
@@ -64,8 +66,10 @@
             // 
             // SpeechToTextForm
             // 
+            this.AcceptButton = this.enableVoiceBttn;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.stopBttn;
             this.ClientSize = new System.Drawing.Size(456, 459);
             this.Controls.Add(this.richTextBox);
             this.Controls.Add(this.stopBttn);

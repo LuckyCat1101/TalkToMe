@@ -7,54 +7,67 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Speech.Recognition;
+
+using NAudio.Wave;
+using Google.Apis.Auth.OAuth2;
+using Google.Cloud.Speech.V1;
+using Grpc.Auth;
 
 namespace BuiltInSpeechRecognition
 {
     public partial class SpeechToTextForm : Form
     {
-        SpeechRecognitionEngine recognitionEngine = new SpeechRecognitionEngine();
+        private BufferedWaveProvider bwp;
+
+        WaveIn waveIn;
+        WaveOut waveOut;
+        WaveFileWriter writer;
+        WaveFileReader reader;
+        string output = "audio.raw";
 
         public SpeechToTextForm()
         {
             InitializeComponent();
+
+            waveOut = new WaveOut();
+            waveIn = new WaveIn();
+
+            waveIn.DataAvailable += new EventHandler<WaveInEventArgs>(waveIn_DataAvailable);
+            waveIn.WaveFormat = new NAudio.Wave.WaveFormat(16000, 1);
+            bwp = new BufferedWaveProvider(waveIn.WaveFormat);
+            bwp.DiscardOnBufferOverflow = true;
+        }
+
+        void waveIn_DataAvailable(object sender, WaveInEventArgs e)
+        {
+            bwp.AddSamples(e.Buffer, 0, e.BytesRecorded);
+
         }
 
         private void SpeechToTextForm_Load(object sender, EventArgs e)
         {
-            // Create a default dictation grammar.  
-            GrammarBuilder gBuilder = new GrammarBuilder();
-            gBuilder.AppendDictation();
-
-            Grammar grammar = new Grammar(gBuilder);
-
-            // Create the spelling dictation grammar.  
-            DictationGrammar spellingDictationGrammar =
-              new DictationGrammar("grammar:dictation#spelling");
-            spellingDictationGrammar.Name = "spelling dictation";
-            spellingDictationGrammar.Enabled = true;
-
-            recognitionEngine.LoadGrammar(grammar);
-            recognitionEngine.LoadGrammar(spellingDictationGrammar);
-            recognitionEngine.SetInputToDefaultAudioDevice();
-            recognitionEngine.SpeechRecognized += RecognitionEngine_SpeechRecognized;
-        }
-
-        private void RecognitionEngine_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
-        {
-            richTextBox.Text += " " + e.Result.Text;
+            
         }
 
         private void stopBttn_Click(object sender, EventArgs e)
         {
-            recognitionEngine.RecognizeAsyncStop();
+            
             stopBttn.Enabled = false;
+            enableVoiceBttn.Enabled = true;
         }
 
         private void enableVoiceBttn_Click(object sender, EventArgs e)
         {
-            recognitionEngine.RecognizeAsync(RecognizeMode.Multiple);
+            if (NAudio.Wave.WaveIn.DeviceCount < 1)
+            {
+                Console.WriteLine("No microphone!");
+                return;
+            }
+
+            waveIn.StartRecording();
+
             stopBttn.Enabled = true;
+            enableVoiceBttn.Enabled = false;
         }
     }
 
