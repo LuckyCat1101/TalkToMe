@@ -55,7 +55,7 @@ namespace BuiltInSpeechRecognition
 
         private void enableVoiceBttn_Click(object sender, EventArgs e)
         {
-            recognitionEngine.RecognizeAsync();
+            recognitionEngine.RecognizeAsync(RecognizeMode.Multiple);
             startAudioBttn.Enabled = false;
             stopBttn.Enabled = true;
         }
@@ -64,19 +64,19 @@ namespace BuiltInSpeechRecognition
         {
             if (e.Error != null)
             {
-                richTextBox.Text += "\n An Error occurred: " + e.Error.GetType().Name +  e.Error.Message.ToString();
+                richTextBox.Text += "\n \n An Error occurred: " + e.Error.GetType().Name +  e.Error.Message.ToString();
                 stopBttn.Enabled = false;
                 startAudioBttn.Enabled = true;
             }
             if (e.Cancelled)
             {
-                richTextBox.Text += "\n  Operation cancelled.";
+                richTextBox.Text += "\n \nOperation cancelled.";
                 stopBttn.Enabled = false;
                 startAudioBttn.Enabled = true;
             }
             if (e.InputStreamEnded)
             {
-                richTextBox.Text += "\n End of audio file encountered.";
+                richTextBox.Text += "\n \nEnd of audio file encountered.";
                 stopBttn.Enabled = false;
                 startAudioBttn.Enabled = true;
             }
