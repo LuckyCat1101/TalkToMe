@@ -28,20 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.enableVoiceBttn = new System.Windows.Forms.Button();
+            this.startAudioBttn = new System.Windows.Forms.Button();
             this.stopBttn = new System.Windows.Forms.Button();
             this.richTextBox = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
-            // enableVoiceBttn
+            // startAudioBttn
             // 
-            this.enableVoiceBttn.Location = new System.Drawing.Point(36, 417);
-            this.enableVoiceBttn.Name = "enableVoiceBttn";
-            this.enableVoiceBttn.Size = new System.Drawing.Size(184, 30);
-            this.enableVoiceBttn.TabIndex = 0;
-            this.enableVoiceBttn.Text = "Start Voice Recording";
-            this.enableVoiceBttn.UseVisualStyleBackColor = true;
-            this.enableVoiceBttn.Click += new System.EventHandler(this.enableVoiceBttn_Click);
+            this.startAudioBttn.Location = new System.Drawing.Point(36, 417);
+            this.startAudioBttn.Name = "startAudioBttn";
+            this.startAudioBttn.Size = new System.Drawing.Size(184, 30);
+            this.startAudioBttn.TabIndex = 0;
+            this.startAudioBttn.Text = "Start Converting";
+            this.startAudioBttn.UseVisualStyleBackColor = true;
+            this.startAudioBttn.Click += new System.EventHandler(this.enableVoiceBttn_Click);
             // 
             // stopBttn
             // 
@@ -50,7 +50,7 @@
             this.stopBttn.Name = "stopBttn";
             this.stopBttn.Size = new System.Drawing.Size(184, 30);
             this.stopBttn.TabIndex = 1;
-            this.stopBttn.Text = "Stop Voice Recording";
+            this.stopBttn.Text = "Stop Converting";
             this.stopBttn.UseVisualStyleBackColor = true;
             this.stopBttn.Click += new System.EventHandler(this.stopBttn_Click);
             // 
@@ -69,7 +69,7 @@
             this.ClientSize = new System.Drawing.Size(456, 459);
             this.Controls.Add(this.richTextBox);
             this.Controls.Add(this.stopBttn);
-            this.Controls.Add(this.enableVoiceBttn);
+            this.Controls.Add(this.startAudioBttn);
             this.Name = "SpeechToTextForm";
             this.Text = "Microsoft Speech: Speech To Text";
             this.Load += new System.EventHandler(this.SpeechToTextForm_Load);
@@ -79,7 +79,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Button enableVoiceBttn;
+        private System.Windows.Forms.Button startAudioBttn;
         private System.Windows.Forms.Button stopBttn;
         private System.Windows.Forms.RichTextBox richTextBox;
     }

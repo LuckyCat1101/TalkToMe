@@ -36,8 +36,9 @@ namespace BuiltInSpeechRecognition
 
             recognitionEngine.LoadGrammar(grammar);
             recognitionEngine.LoadGrammar(spellingDictationGrammar);
-            recognitionEngine.SetInputToDefaultAudioDevice();
+            recognitionEngine.SetInputToWaveFile(@"C:\test.wav");
             recognitionEngine.SpeechRecognized += RecognitionEngine_SpeechRecognized;
+            recognitionEngine.RecognizeCompleted += RecognitionEngine_RecognizeCompleted;
         }
 
         private void RecognitionEngine_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
@@ -49,13 +50,37 @@ namespace BuiltInSpeechRecognition
         {
             recognitionEngine.RecognizeAsyncStop();
             stopBttn.Enabled = false;
+            startAudioBttn.Enabled = true;
         }
 
         private void enableVoiceBttn_Click(object sender, EventArgs e)
         {
-            recognitionEngine.RecognizeAsync(RecognizeMode.Multiple);
+            recognitionEngine.RecognizeAsync();
+            startAudioBttn.Enabled = false;
             stopBttn.Enabled = true;
         }
-    }
 
+        private void RecognitionEngine_RecognizeCompleted(object sender, RecognizeCompletedEventArgs e)
+        {
+            if (e.Error != null)
+            {
+                richTextBox.Text += "\n An Error occurred: " + e.Error.GetType().Name +  e.Error.Message.ToString();
+                stopBttn.Enabled = false;
+                startAudioBttn.Enabled = true;
+            }
+            if (e.Cancelled)
+            {
+                richTextBox.Text += "\n  Operation cancelled.";
+                stopBttn.Enabled = false;
+                startAudioBttn.Enabled = true;
+            }
+            if (e.InputStreamEnded)
+            {
+                richTextBox.Text += "\n End of audio file encountered.";
+                stopBttn.Enabled = false;
+                startAudioBttn.Enabled = true;
+            }
+        }
+        
+    }
 }
