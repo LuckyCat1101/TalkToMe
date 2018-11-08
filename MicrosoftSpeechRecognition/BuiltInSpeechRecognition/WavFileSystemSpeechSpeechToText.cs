@@ -22,11 +22,27 @@ namespace BuiltInSpeechRecognition
 
         private void SpeechToTextForm_Load(object sender, EventArgs e)
         {
+            /*//Choices help_ = new Choices(new string[] { "lovely", "girlfriend", "blue" });
+
+            Choices choicesStartStop = new Choices();
+            choicesStartStop.Add("lovely");
+            choicesStartStop.Add("cute");
+            choicesStartStop.Add("Hi");
+            choicesStartStop.Add("I'm");
+            choicesStartStop.Add("testing");
+
+            GrammarBuilder gb_StartStop =
+              new GrammarBuilder(choicesStartStop);
+              */
+
             // Create a default dictation grammar.  
             GrammarBuilder gBuilder = new GrammarBuilder();
             gBuilder.AppendDictation();
+            //gBuilder.Append(help_);
 
             Grammar grammar = new Grammar(gBuilder);
+
+           // Grammar g_StartStop = new Grammar(gb_StartStop);
 
             // Create the spelling dictation grammar.  
             DictationGrammar spellingDictationGrammar =
@@ -36,7 +52,7 @@ namespace BuiltInSpeechRecognition
 
             recognitionEngine.LoadGrammar(grammar);
             recognitionEngine.LoadGrammar(spellingDictationGrammar);
-            recognitionEngine.SetInputToWaveFile(@"C:\test.wav");
+            //recognitionEngine.LoadGrammar(g_StartStop);
             recognitionEngine.SpeechRecognized += RecognitionEngine_SpeechRecognized;
             recognitionEngine.RecognizeCompleted += RecognitionEngine_RecognizeCompleted;
         }
@@ -55,9 +71,22 @@ namespace BuiltInSpeechRecognition
 
         private void enableVoiceBttn_Click(object sender, EventArgs e)
         {
-            recognitionEngine.RecognizeAsync(RecognizeMode.Multiple);
-            startAudioBttn.Enabled = false;
-            stopBttn.Enabled = true;
+            OpenFileDialog openAudio = new OpenFileDialog();
+            if (openAudio.ShowDialog(this) == DialogResult.OK)
+            {
+                // gets name for saving
+                string audio = openAudio.FileName;
+
+                // reset audio input device
+                recognitionEngine.SetInputToWaveFile(audio);
+                recognitionEngine.RecognizeAsync(RecognizeMode.Multiple);
+                startAudioBttn.Enabled = false;
+                stopBttn.Enabled = true;
+                richTextBox.Clear();
+            }
+            else
+                return;
+
         }
 
         private void RecognitionEngine_RecognizeCompleted(object sender, RecognizeCompletedEventArgs e)
@@ -77,6 +106,7 @@ namespace BuiltInSpeechRecognition
             if (e.InputStreamEnded)
             {
                 richTextBox.Text += "\n \nEnd of audio file encountered.";
+                recognitionEngine.RecognizeAsyncStop();
                 stopBttn.Enabled = false;
                 startAudioBttn.Enabled = true;
             }
