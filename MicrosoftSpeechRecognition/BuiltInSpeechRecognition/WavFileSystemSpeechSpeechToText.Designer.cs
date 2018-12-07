@@ -71,7 +71,7 @@
             this.Controls.Add(this.stopBttn);
             this.Controls.Add(this.startAudioBttn);
             this.Name = "SpeechToTextForm";
-            this.Text = "Microsoft Speech: Speech To Text";
+            this.Text = "Wave File: Speech To Text";
             this.Load += new System.EventHandler(this.SpeechToTextForm_Load);
             this.ResumeLayout(false);
 
