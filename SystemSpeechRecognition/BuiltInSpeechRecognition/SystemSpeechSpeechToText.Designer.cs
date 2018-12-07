@@ -71,7 +71,7 @@
             this.Controls.Add(this.stopBttn);
             this.Controls.Add(this.enableVoiceBttn);
             this.Name = "SpeechToTextForm";
-            this.Text = " System Speech: Speech To Text";
+            this.Text = "Continuous: Speech To Text";
             this.Load += new System.EventHandler(this.SpeechToTextForm_Load);
             this.ResumeLayout(false);
 
