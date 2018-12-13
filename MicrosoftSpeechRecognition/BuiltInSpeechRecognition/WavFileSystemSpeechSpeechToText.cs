@@ -8,12 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Speech.Recognition;
+using System.Diagnostics;
 
 namespace BuiltInSpeechRecognition
 {
     public partial class SpeechToTextForm : Form
     {
         SpeechRecognitionEngine recognitionEngine = new SpeechRecognitionEngine();
+        Stopwatch stopWatch;
 
         public SpeechToTextForm()
         {
@@ -55,6 +57,9 @@ namespace BuiltInSpeechRecognition
             //recognitionEngine.LoadGrammar(g_StartStop);
             recognitionEngine.SpeechRecognized += RecognitionEngine_SpeechRecognized;
             recognitionEngine.RecognizeCompleted += RecognitionEngine_RecognizeCompleted;
+
+            // stopwatch
+            stopWatch = new Stopwatch();
         }
 
         private void RecognitionEngine_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
@@ -80,7 +85,7 @@ namespace BuiltInSpeechRecognition
                 // reset audio input device
                 recognitionEngine.SetInputToWaveFile(audio);
                 recognitionEngine.RecognizeAsync(RecognizeMode.Multiple);
-                recogTimer.Start(); // start the timer
+                stopWatch.Start();
                 startAudioBttn.Enabled = false;
                 stopBttn.Enabled = true;
                 richTextBox.Clear();
@@ -108,8 +113,8 @@ namespace BuiltInSpeechRecognition
             {
                 recognitionEngine.RecognizeAsyncStop();
                 richTextBox.Text += "\n \nEnd of audio file encountered.";
-                recogTimer.Stop();
-                richTextBox.Text += "\n" + recogTimer.Interval.ToString() + " milliseconds";
+                stopWatch.Stop();
+                richTextBox.Text += "\n" + stopWatch.ElapsedMilliseconds.ToString() + " milliseconds";
                 stopBttn.Enabled = false;
                 startAudioBttn.Enabled = true;
             }

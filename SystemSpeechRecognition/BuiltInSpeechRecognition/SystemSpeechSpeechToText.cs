@@ -43,12 +43,15 @@ namespace BuiltInSpeechRecognition
         private void RecognitionEngine_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
         {
             richTextBox.Text += " " + e.Result.Text;
+            recogTimer.Enabled = true;
 
         }
 
         private void stopBttn_Click(object sender, EventArgs e)
         {
             recognitionEngine.RecognizeAsyncStop();
+            recogTimer.Stop();
+            richTextBox.Text += "\n" + recogTimer.Interval.ToString() + " milliseconds";
             stopBttn.Enabled = false;
             enableVoiceBttn.Enabled = true;
         }
@@ -56,6 +59,7 @@ namespace BuiltInSpeechRecognition
         private void enableVoiceBttn_Click(object sender, EventArgs e)
         {
             recognitionEngine.RecognizeAsync(RecognizeMode.Multiple);
+            recogTimer.Start();
             enableVoiceBttn.Enabled = false;
             stopBttn.Enabled = true;
             richTextBox.Clear();
