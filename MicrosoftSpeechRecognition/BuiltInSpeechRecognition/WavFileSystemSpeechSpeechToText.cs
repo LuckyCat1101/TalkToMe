@@ -15,7 +15,6 @@ namespace BuiltInSpeechRecognition
     public partial class SpeechToTextForm : Form
     {
         SpeechRecognitionEngine recognitionEngine = new SpeechRecognitionEngine();
-        Stopwatch stopWatch;
 
         public SpeechToTextForm()
         {
@@ -57,14 +56,16 @@ namespace BuiltInSpeechRecognition
             //recognitionEngine.LoadGrammar(g_StartStop);
             recognitionEngine.SpeechRecognized += RecognitionEngine_SpeechRecognized;
             recognitionEngine.RecognizeCompleted += RecognitionEngine_RecognizeCompleted;
-
-            // stopwatch
-            stopWatch = new Stopwatch();
+            
         }
 
         private void RecognitionEngine_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
         {
-            richTextBox.Text += " " + e.Result.Text;
+            DateTime start = DateTime.Now;
+            richTextBox.Text += string.Format("Start: {0:ss:fff}", start);
+            richTextBox.Text += "\n" + e.Result.Text + "\n";
+            DateTime end = DateTime.Now;
+            richTextBox.Text += string.Format("End: {0:ss:fff} \n", end);
         }
 
         private void stopBttn_Click(object sender, EventArgs e)
@@ -85,7 +86,6 @@ namespace BuiltInSpeechRecognition
                 // reset audio input device
                 recognitionEngine.SetInputToWaveFile(audio);
                 recognitionEngine.RecognizeAsync(RecognizeMode.Multiple);
-                stopWatch.Start();
                 startAudioBttn.Enabled = false;
                 stopBttn.Enabled = true;
                 richTextBox.Clear();
@@ -113,8 +113,6 @@ namespace BuiltInSpeechRecognition
             {
                 recognitionEngine.RecognizeAsyncStop();
                 richTextBox.Text += "\n \nEnd of audio file encountered.";
-                stopWatch.Stop();
-                richTextBox.Text += "\n" + stopWatch.ElapsedMilliseconds.ToString() + " milliseconds";
                 stopBttn.Enabled = false;
                 startAudioBttn.Enabled = true;
             }

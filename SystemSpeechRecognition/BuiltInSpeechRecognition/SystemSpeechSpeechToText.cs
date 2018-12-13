@@ -8,12 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Speech.Recognition;
+using System.Diagnostics;
 
 namespace BuiltInSpeechRecognition
 {
     public partial class SpeechToTextForm : Form
     {
         SpeechRecognitionEngine recognitionEngine = new SpeechRecognitionEngine();
+        Stopwatch stopWatch;
 
         public SpeechToTextForm()
         {
@@ -38,20 +40,27 @@ namespace BuiltInSpeechRecognition
             recognitionEngine.LoadGrammar(spellingDictationGrammar);
             recognitionEngine.SetInputToDefaultAudioDevice();
             recognitionEngine.SpeechRecognized += RecognitionEngine_SpeechRecognized;
+
+            // stopwatch
+            stopWatch = new Stopwatch();
         }
 
         private void RecognitionEngine_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
         {
-            richTextBox.Text += " " + e.Result.Text;
-            recogTimer.Enabled = true;
-
+            //stopWatch.Start();
+            DateTime start = DateTime.Now;
+            richTextBox.Text += string.Format("{0:ss: ffff}", start);
+            richTextBox.Text += "\n " + e.Result.Text + " : \n";
+            DateTime end = DateTime.Now;
+            richTextBox.Text += string.Format("{0:ss:ffff} \n", end);
+            //stopWatch.Reset();
+            // date time now start minus end
         }
 
         private void stopBttn_Click(object sender, EventArgs e)
         {
             recognitionEngine.RecognizeAsyncStop();
-            recogTimer.Stop();
-            richTextBox.Text += "\n" + recogTimer.Interval.ToString() + " milliseconds";
+            stopWatch.Stop();
             stopBttn.Enabled = false;
             enableVoiceBttn.Enabled = true;
         }
@@ -59,11 +68,11 @@ namespace BuiltInSpeechRecognition
         private void enableVoiceBttn_Click(object sender, EventArgs e)
         {
             recognitionEngine.RecognizeAsync(RecognizeMode.Multiple);
-            recogTimer.Start();
             enableVoiceBttn.Enabled = false;
             stopBttn.Enabled = true;
             richTextBox.Clear();
         }
+
     }
 
 }
