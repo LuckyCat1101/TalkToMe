@@ -80,6 +80,7 @@ namespace BuiltInSpeechRecognition
                 // reset audio input device
                 recognitionEngine.SetInputToWaveFile(audio);
                 recognitionEngine.RecognizeAsync(RecognizeMode.Multiple);
+                recogTimer.Start(); // start the timer
                 startAudioBttn.Enabled = false;
                 stopBttn.Enabled = true;
                 richTextBox.Clear();
@@ -105,8 +106,10 @@ namespace BuiltInSpeechRecognition
             }
             if (e.InputStreamEnded)
             {
-                richTextBox.Text += "\n \nEnd of audio file encountered.";
                 recognitionEngine.RecognizeAsyncStop();
+                richTextBox.Text += "\n \nEnd of audio file encountered.";
+                recogTimer.Stop();
+                richTextBox.Text += "\n" + recogTimer.Interval.ToString() + " milliseconds";
                 stopBttn.Enabled = false;
                 startAudioBttn.Enabled = true;
             }

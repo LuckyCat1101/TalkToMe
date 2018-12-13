@@ -28,9 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.startAudioBttn = new System.Windows.Forms.Button();
             this.stopBttn = new System.Windows.Forms.Button();
             this.richTextBox = new System.Windows.Forms.RichTextBox();
+            this.recogTimer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // startAudioBttn
@@ -82,6 +84,7 @@
         private System.Windows.Forms.Button startAudioBttn;
         private System.Windows.Forms.Button stopBttn;
         private System.Windows.Forms.RichTextBox richTextBox;
+        private System.Windows.Forms.Timer recogTimer;
     }
 }
 
