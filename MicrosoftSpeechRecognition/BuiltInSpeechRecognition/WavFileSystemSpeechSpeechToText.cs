@@ -15,6 +15,7 @@ namespace BuiltInSpeechRecognition
     public partial class SpeechToTextForm : Form
     {
         SpeechRecognitionEngine recognitionEngine = new SpeechRecognitionEngine();
+        Stopwatch stopWatch;
 
         public SpeechToTextForm()
         {
@@ -56,16 +57,16 @@ namespace BuiltInSpeechRecognition
             //recognitionEngine.LoadGrammar(g_StartStop);
             recognitionEngine.SpeechRecognized += RecognitionEngine_SpeechRecognized;
             recognitionEngine.RecognizeCompleted += RecognitionEngine_RecognizeCompleted;
-            
+            stopWatch = new Stopwatch();
         }
 
         private void RecognitionEngine_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
         {
-            DateTime start = DateTime.Now;
-            richTextBox.Text += string.Format("Start: {0:ss:fff}", start);
+            stopWatch.Start();            
             richTextBox.Text += "\n" + e.Result.Text + "\n";
-            DateTime end = DateTime.Now;
-            richTextBox.Text += string.Format("End: {0:ss:fff} \n", end);
+            richTextBox.Text += "" + stopWatch.Elapsed;
+            stopWatch.Reset();
+            
         }
 
         private void stopBttn_Click(object sender, EventArgs e)
